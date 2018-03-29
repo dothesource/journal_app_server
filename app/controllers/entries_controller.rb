@@ -46,6 +46,6 @@ class EntriesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def entry_params
-      params.require(:entry).permit(:content)
+      params.require(:entry).permit(:content, :timestamp)
     end
 end
