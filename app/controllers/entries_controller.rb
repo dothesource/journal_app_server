@@ -29,8 +29,9 @@ class EntriesController < ApplicationController
 
     respond_to do |format|
       if @entry.save
+        @day = @entry.day
         format.html { redirect_to @entry, notice: 'Entry was successfully created.' }
-        format.json { render :show, status: :created, location: @entry }
+        format.json { render 'days/show', status: :created }
       else
         format.html { render :new }
         format.json { render json: @entry.errors, status: :unprocessable_entity }
@@ -56,9 +57,10 @@ class EntriesController < ApplicationController
   # DELETE /entries/1.json
   def destroy
     @entry.destroy
+    @day = @entry.day
     respond_to do |format|
       format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render 'days/show', status: :created }
     end
   end
 
