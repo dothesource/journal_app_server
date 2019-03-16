@@ -7,7 +7,7 @@ class User < ApplicationRecord
 
   has_many :days
 
-  def find_or_create_day
+  def self.find_or_create_day
     the_day = Day.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).first
     return the_day if the_day
 
