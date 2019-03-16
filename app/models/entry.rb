@@ -8,7 +8,8 @@ class Entry < ApplicationRecord
   end
 
   after_create do
-    the_day = Day.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).first
+    time = self.datetime || Time.zone.now
+    the_day = Day.where(created_at: time.beginning_of_day..time.end_of_day).first
     if the_day
       the_day.entries << self
       the_day.save
