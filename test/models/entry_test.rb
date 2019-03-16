@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class EntryTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "should not save entry without text" do
+    p "say something"
+    entry = Entry.new
+    assert_not entry.save
+  end
 end

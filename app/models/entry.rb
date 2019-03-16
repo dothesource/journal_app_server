@@ -5,22 +5,14 @@ class Entry < ApplicationRecord
 
   before_create do
     self.datetime ||= DateTime.now
+    day = Day.find_or_create(self.datetime)
+    self.day_id = day.id
   end
 
-  after_create do
-    time = self.datetime || Time.zone.now
-    the_day = Day.where(created_at: time.beginning_of_day..time.end_of_day).first
-    if the_day
-      the_day.entries << self
-      the_day.save
-    else
-      the_day = Day.new
-      the_day.entries << self
-      the_day.save!
+  before_update do
+    if self.datetime_changed?
+      day = Day.find_or_create(self.datetime)
+      self.day_id = day.id
     end
-
-    # day = User.find_or_create_day
-
-    # the_day.save
   end
 end
