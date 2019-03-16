@@ -1,6 +1,5 @@
 class Entry < ApplicationRecord
   attr_accessor :user
-  belongs_to :day, optional: true
 
   before_create do
     self.datetime ||= DateTime.now
@@ -14,7 +13,7 @@ class Entry < ApplicationRecord
     else
       the_day = Day.new
       the_day.entries << self
-      the_day.save
+      the_day.save!
     end
 
     # day = User.find_or_create_day
