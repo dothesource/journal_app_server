@@ -1,5 +1,7 @@
 class Entry < ApplicationRecord
+  belongs_to :day, optional: true
   attr_accessor :user
+  validates :text, presence: true
 
   before_create do
     self.datetime ||= DateTime.now
