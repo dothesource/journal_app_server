@@ -1,5 +1,5 @@
 class EntriesController < ApplicationController
-  before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :set_entry, only: [:show, :edit, :update, :destroy, :archive, :unarchive]
 
   # GET /entries
   # GET /entries.json
@@ -61,6 +61,30 @@ class EntriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
       format.json { render 'days/show', status: :created }
+    end
+  end
+
+  # PUT /entries/1/archive
+  # PUT /entries/1/arquive.json
+  def archive
+    @day = @entry.day
+    respond_to do |format|
+      if @entry.archive
+        format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
+        format.json { render 'days/show', status: :ok }
+      end
+    end
+  end
+
+  # PUT /entries/1/unarchive
+  # PUT /entries/1/unarquive.json
+  def unarchive
+    @day = @entry.day
+    respond_to do |format|
+      if @entry.unarchive
+        format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
+        format.json { render 'days/show', status: :ok }
+      end
     end
   end
 

@@ -3,6 +3,18 @@ class Entry < ApplicationRecord
   attr_accessor :user
   validates :text, presence: true
 
+  default_scope { where(:archived_at => nil) }
+
+  def archive
+    self.archived_at = DateTime.now
+    self.save
+  end
+
+  def unarchive
+    self.archived_at = nil
+    self.save
+  end
+
   before_create do
     self.datetime ||= DateTime.now
     day = Day.find_or_create(self.datetime)
