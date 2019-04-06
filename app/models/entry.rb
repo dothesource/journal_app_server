@@ -1,7 +1,6 @@
 class Entry < ApplicationRecord
   belongs_to :day, optional: true
   attr_accessor :user
-  validates :text, presence: true
 
   scope :archived, -> { where.not(:archived_at => nil) }
   scope :not_archived, -> { where(:archived_at => nil) }
