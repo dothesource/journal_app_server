@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :days
+  resources :days do
+    get 'archived', on: :collection
+  end
   resources :entries do
     put 'archive', on: :member
     put 'unarchive', on: :member

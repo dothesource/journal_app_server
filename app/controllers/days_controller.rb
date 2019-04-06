@@ -61,6 +61,11 @@ class DaysController < ApplicationController
     end
   end
 
+  # GET /days/archived.json
+  def archived
+    @days = Day.all.order('datetime asc')
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_day

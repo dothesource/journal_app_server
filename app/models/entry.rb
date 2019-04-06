@@ -3,7 +3,8 @@ class Entry < ApplicationRecord
   attr_accessor :user
   validates :text, presence: true
 
-  default_scope { where(:archived_at => nil) }
+  scope :archived, -> { where.not(:archived_at => nil) }
+  scope :not_archived, -> { where(:archived_at => nil) }
 
   def archive
     self.archived_at = DateTime.now
