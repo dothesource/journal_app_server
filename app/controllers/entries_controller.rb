@@ -68,6 +68,7 @@ class EntriesController < ApplicationController
   # PUT /entries/1/arquive.json
   def archive
     @day = @entry.day
+    @entries = @day.entries.not_archived
     respond_to do |format|
       if @entry.archive
         format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
@@ -80,6 +81,7 @@ class EntriesController < ApplicationController
   # PUT /entries/1/unarquive.json
   def unarchive
     @day = @entry.day
+    @entries = @day.entries.archived
     respond_to do |format|
       if @entry.unarchive
         format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }

@@ -1,4 +1,5 @@
+@entries ||= @day.entries.not_archived
 json.partial! "days/day", {
   day: @day,
-  entries: @day.entries.not_archived.order('datetime asc')
+  entries: @entries.order('datetime asc')
 }
