@@ -58,6 +58,7 @@ class EntriesController < ApplicationController
   def destroy
     @entry.destroy
     @day = @entry.day
+    @entries = @day.entries.archived # because delete is only on archived page
     respond_to do |format|
       format.html { redirect_to entries_url, notice: 'Entry was successfully destroyed.' }
       format.json { render 'days/show', status: :created }
