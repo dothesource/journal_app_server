@@ -4,7 +4,7 @@ class DaysController < ApplicationController
   # GET /days
   # GET /days.json
   def index
-    @days = Day.all.order('datetime asc')
+    @days = Day.order('datetime asc').not_empty
   end
 
   # GET /days/1
@@ -63,7 +63,7 @@ class DaysController < ApplicationController
 
   # GET /days/archived.json
   def archived
-    @days = Day.all.order('datetime asc')
+    @days = Day.order('datetime asc').not_archived_empty
   end
 
   private
