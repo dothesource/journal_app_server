@@ -5,6 +5,10 @@ class EntriesController < ApplicationController
   # GET /entries.json
   def index
     @entries = Entry.all
+
+    if params[:query].present?
+      @entries = @entries.where("text LIKE ?", "%#{params[:query]}%")
+    end
   end
 
   # GET /entries/1
